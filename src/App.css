@@ -1,0 +1,49 @@
+.step-form {
+  display: flex;
+  padding: 8px;
+  gap: 16px;
+}
+
+.step-form__element {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  justify-content: space-between;
+}
+
+.step-form__input {
+  padding: 6px;
+}
+
+.table {
+  display: flex;
+  flex-direction: column;
+  border: 2px solid black;
+  border-radius: 16px;
+  padding: 16px;
+}
+
+.table__header {
+  display: flex;
+  justify-content: space-between;
+  padding: 24px;
+}
+
+.table__row {
+  display: flex;
+  justify-content: space-between;
+  padding: 8px;
+}
+
+.button_edit {
+  width: 24px;
+  height: 24px;
+  background: center / contain url("./img/edit-pencil-line-01-svgrepo-com.svg") no-repeat;
+}
+
+.button_delete {
+  width: 24px;
+  height: 24px;
+  background: center / contain url("./img/remove-round-svgrepo-com.svg") no-repeat;
+}
