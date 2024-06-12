@@ -1,12 +1,8 @@
-import { ReactHTMLElement, useRef, useState } from 'react'
+import React, { FC, ReactHTMLElement, useRef, useState } from 'react'
 import './App.css'
 import { NewStepBar } from './NewStepBar/NewStepBar'
-import { StepsList } from './StepsList/StepsList'
+import { StepsList, StepsT } from './StepsList/StepsList'
 
-type StepsT = {
-  date: string,
-  distance: number,
-}
 
 function App() {
   const [steps, setSteps] = useState<StepsT[]>([
@@ -30,8 +26,16 @@ function App() {
 
   const submitHandle = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault()
-    const newDate = formRefDate.current?.value
-    const newDistance = formRefDist.current?.value
+    const newDate: string = formRefDate.current?.value || ''
+    const newDistance: string = formRefDist.current?.value || ''
+
+    const distValid = /^\d+(?:\.\d+)?$|^\.\d+$/
+    // console.log(distValid.test(newDistance))
+
+    if (!distValid.test(newDistance)) {
+      alert("Введено некорректное значение пройденного расстояния")
+      return
+    }
 
     for (let index = 0; index<steps.length;) {
       if (steps[index]["date"] == newDate) {
@@ -45,7 +49,7 @@ function App() {
 
     setSteps([...steps, {date: newDate, distance: parseFloat(newDistance)}])
 
-    console.log(steps)
+    // console.log(steps)
   }
 
   const onDelete = (removingDate: string) => {

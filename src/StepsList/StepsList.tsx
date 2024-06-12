@@ -1,6 +1,19 @@
+import { FC } from "react"
+import { StepItem } from "../StepItem/StepItem"
 
+export type StepsT = {
+  date: string,
+  distance: number,
+}
 
-export const StepsList = ({data, stepListRef, onDelete, onEdit}) => {
+type StepListArgs = {
+  data: StepsT[],
+  stepListRef: React.RefObject<HTMLInputElement>,
+  onDelete: void,
+  onEdit: void
+}
+
+export const StepsList: FC<StepListArgs> = ({data, stepListRef, onDelete, onEdit}) => {
 
   return (
     <>
@@ -12,15 +25,8 @@ export const StepsList = ({data, stepListRef, onDelete, onEdit}) => {
       <div className="table">
         {data
           .sort((a, b) => {return a.date > b.date ? -1 : 1; })
-          .map(({ date, distance }, index) => (
-            <div className="table__row" key={index}>
-              <div className="table__cell">{date}</div>
-              <div className="table__cell">{distance}</div>
-              <div className="table__cell">
-                <button className="button_edit" onClick={() => onEdit({date, distance})}></button>
-                <button className="button_delete" onClick={() => onDelete(date)}></button>
-              </div>
-            </div>
+          .map(({ date, distance }) => (
+            <StepItem key={date} date={date} distance={distance} onEdit={onEdit} onDelete={onDelete}/>
           ))}
       </div>
     </>
